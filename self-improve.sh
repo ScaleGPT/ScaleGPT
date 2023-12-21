@@ -10,7 +10,7 @@ echo "$PROMPT_FRAMEWORKS"
 EXISTS_SOFTWARE_DEVELOPMENT_FRAMEWORKS="$(ls Software_Development_Frameworks)"
 for FRAMEWORK in $EXISTS_SOFTWARE_DEVELOPMENT_FRAMEWORKS
 do
-    PROMPT_ROLES="List roles of $FRAMEWORK"
-    echo "$PROMPT_ROLES" > "Software_Development_Frameworks/$FRAMEWORK/PROMPT_ROLES.md"
-    touch "Software_Development_Frameworks/$FRAMEWORK/ROLES.md"
+    PROMPT_GROUP_OF_ROLES="List group of roles in $FRAMEWORK"
+    echo "$PROMPT_GROUP_OF_ROLES" > "Software_Development_Frameworks/$FRAMEWORK/PROMPT_GROUP_OF_ROLES.md"
+    touch "Software_Development_Frameworks/$FRAMEWORK/GROUP_ROLES.md"
 done
