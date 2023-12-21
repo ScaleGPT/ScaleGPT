@@ -1,0 +1,5 @@
+README_PATH="$(pwd)/README.md"
+PROMPT="I am creating a new project"
+PROMPT="$PROMPT, $(cat $README_PATH)"
+PROMPT="$PROMPT. Let suggest directories of this project"
+echo "$PROMPT"
