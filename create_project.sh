@@ -22,5 +22,16 @@ else
     echo "$FRAMEWORK" >$DATA_FRAMEWORK_PATH
 fi
 DATA_FRAMEWORK="$(cat $DATA_FRAMEWORK_PATH)"
-PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our project is going to have following roles: $(ls Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles). Which one goes first?"
+PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our project is going to have following group of roles: $(ls Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/). Which one goes first?"
+# echo "$PROMPT"
+ORDERED_GROUP_OF_ROLES_PATH="$(pwd)/Software_Development_Frameworks/$DATA_FRAMEWORK/Order_for_Group_of_Roles"
+ORDERED_GROUP_OF_ROLES="$(cat $ORDERED_GROUP_OF_ROLES_PATH)"
+# echo "$ORDERED_GROUP_OF_ROLES"
+ROLES="$(ls Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$ORDERED_GROUP_OF_ROLES)"
+# echo "$ROLES"
+PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our project is going to have following roles: $ROLES. Which one goes first?"
 echo "$PROMPT"
+ORDERED_ROLES_PATH="$(pwd)/Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$ORDERED_GROUP_OF_ROLES/Order_for_Roles"
+touch $ORDERED_ROLES_PATH
+ORDERED_ROLES="$(cat $ORDERED_ROLES_PATH)"
+echo "$ORDERED_ROLES"

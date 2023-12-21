@@ -15,10 +15,11 @@ do
     echo "$PROMPT_GROUP_OF_ROLES" > "Software_Development_Frameworks/$FRAMEWORK/PROMPT_GROUP_OF_ROLES.md"
     touch "Software_Development_Frameworks/$FRAMEWORK/GROUP_ROLES.md"
     mkdir "Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles"
+    touch "Software_Development_Frameworks/$FRAMEWORK/Order_for_Group_of_Roles"
     GROUP_ROLES="$(ls Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles)"
     # echo "$GROUP_ROLES"
     for GROUP_ROLE in $GROUP_ROLES; do
-        echo "List roles in $GROUP_ROLE"
+        echo "List roles in $GROUP_ROLE of $FRAMEWORK"
         ROLES="$(ls Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles/$GROUP_ROLE)"
         for ROLE in $ROLES; do
             echo "$ROLE"
