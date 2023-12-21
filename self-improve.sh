@@ -21,9 +21,10 @@ do
         echo "List roles in $GROUP_ROLE"
         ROLES="$(ls Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles/$GROUP_ROLE)"
         for ROLE in $ROLES; do
+            echo "$ROLE"
             PROMPT_ACTIVITIES="List activities in $ROLE of $GROUP_ROLE in $FRAMEWORK"
             echo $PROMPT_ACTIVITIES > "Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles/$GROUP_ROLE/$ROLE/PROMPT_ACTIVITIES.md"
-            echo "$ROLE"
+            touch "Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles/$GROUP_ROLE/$ROLE/ACTIVITIES.md"
         done
     done
 done
