@@ -45,5 +45,25 @@ for GROUP_OF_ROLES in $ORDERED_GROUP_OF_ROLES; do
         echo "$PROMPT"
         WHAT_SHOULD_I_DO_PATH="$GROUP_OF_ROLES_PATH/$ROLE/What_should_I_do.md"
         touch $WHAT_SHOULD_I_DO_PATH
+        ACTIVITIES_PATH="$GROUP_OF_ROLES_PATH/$ROLE/Activities"
+        mkdir $ACTIVITIES_PATH
+        ACTIVITIES="$(cat "$GROUP_OF_ROLES_PATH/$ROLE/ACTIVITIES" | tr '\n' ' ')"
+        for ACTIVITY in $ACTIVITIES; do
+            echo
+            ACTIVITY_PATH="$ACTIVITIES_PATH/$ACTIVITY"
+            mkdir $ACTIVITY_PATH
+            touch "$ACTIVITY_PATH/WHAT_YOU_NEED_TO_KNOW"
+            touch "$ACTIVITY_PATH/WHAT_YOU_NEED_TO_KNOW.md"
+            PROMPT="I am working on a project. $DATA_PROJECT. Our $GROUP_OF_ROLES has following roles: $ROLES. You are acting as $ROLE, $ACTIVITY. What information do you need?"
+            echo "$PROMPT" | sed 's/_/ /g'
+            # 
+            WHAT_YOU_NEED_TO_KNOW_PATH="$ACTIVITY_PATH/WHAT_YOU_NEED_TO_KNOW"
+            WHAT_YOU_NEED_TO_KNOW="$(cat $WHAT_YOU_NEED_TO_KNOW_PATH)"
+            for WHAT_YOU_NEED_TO_KNOW_ITEM in $WHAT_YOU_NEED_TO_KNOW; do
+                WHAT_YOU_NEED_TO_KNOW_ITEM_PATH="$ACTIVITY_PATH/$WHAT_YOU_NEED_TO_KNOW_ITEM"
+                PROMPT="I am working on a project. $DATA_PROJECT. Our $GROUP_OF_ROLES has following roles: $ROLES. You are acting as $ROLE, $ACTIVITY. What are potential $WHAT_YOU_NEED_TO_KNOW_ITEM for this?"
+                echo "$PROMPT" | sed 's/_/ /g'
+            done
+        done
     done
 done
