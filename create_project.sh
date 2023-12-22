@@ -1,4 +1,5 @@
 #!/bin/bash
+DATA_PATH="$(pwd)/data"
 DATA_PROJECT_PATH="$(pwd)/data/PROJECT.md"
 DATA_PROJECT_EXISTS="$(ls data/PROJECT.md)"
 if [ -n "$DATA_PROJECT_EXISTS" ]; then
@@ -63,6 +64,9 @@ for GROUP_OF_ROLES in $ORDERED_GROUP_OF_ROLES; do
                 WHAT_YOU_NEED_TO_KNOW_ITEM_PATH="$ACTIVITY_PATH/$WHAT_YOU_NEED_TO_KNOW_ITEM"
                 PROMPT="I am working on a project. $DATA_PROJECT. Our $GROUP_OF_ROLES has following roles: $ROLES. You are acting as $ROLE, $ACTIVITY. What are potential $WHAT_YOU_NEED_TO_KNOW_ITEM for this?"
                 echo "$PROMPT" | sed 's/_/ /g'
+                DATA_ACTIVITY_PATH="$DATA_PATH/Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$GROUP_OF_ROLES/$ROLE/Activities/$ACTIVITY/"
+                mkdir -p $DATA_ACTIVITY_PATH
+                touch "$DATA_ACTIVITY_PATH/$WHAT_YOU_NEED_TO_KNOW_ITEM.md"
             done
         done
     done
