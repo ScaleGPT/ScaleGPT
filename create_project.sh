@@ -24,14 +24,26 @@ fi
 DATA_FRAMEWORK="$(cat $DATA_FRAMEWORK_PATH)"
 PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our project is going to have following group of roles: $(ls Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/). Which one goes first?"
 # echo "$PROMPT"
-ORDERED_GROUP_OF_ROLES_PATH="$(pwd)/Software_Development_Frameworks/$DATA_FRAMEWORK/Order_for_Group_of_Roles"
+FRAMEWORK_PATH="$(pwd)/Software_Development_Frameworks/$DATA_FRAMEWORK"
+
+ORDERED_GROUP_OF_ROLES_PATH="$FRAMEWORK_PATH/Order_for_Group_of_Roles"
 ORDERED_GROUP_OF_ROLES="$(cat $ORDERED_GROUP_OF_ROLES_PATH)"
-# echo "$ORDERED_GROUP_OF_ROLES"
-ROLES="$(ls Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$ORDERED_GROUP_OF_ROLES)"
-# echo "$ROLES"
-PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our project is going to have following roles: $ROLES. Which one goes first?"
-echo "$PROMPT"
-ORDERED_ROLES_PATH="$(pwd)/Software_Development_Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$ORDERED_GROUP_OF_ROLES/Order_for_Roles"
-touch $ORDERED_ROLES_PATH
-ORDERED_ROLES="$(cat $ORDERED_ROLES_PATH)"
-echo "$ORDERED_ROLES"
+echo "$FRAMEWORK_PATH"
+for GROUP_OF_ROLES in $ORDERED_GROUP_OF_ROLES; do
+    GROUP_OF_ROLES_PATH="$FRAMEWORK_PATH/Group_of_Roles/$GROUP_OF_ROLES"
+    ROLES="$(ls $GROUP_OF_ROLES_PATH | tr '\n' ' ')"
+    PROMPT="I am creating a new project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our $GROUP_OF_ROLES has following roles: $ROLES. Which one goes first?"
+    # echo "$PROMPT"
+    ORDERED_ROLES_PATH="$GROUP_OF_ROLES_PATH/Order_for_Roles"
+    touch $ORDERED_ROLES_PATH
+    ORDERED_ROLES="$(cat $ORDERED_ROLES_PATH | tr '\n' ' ')"
+    # echo "$ORDERED_ROLES"
+    for ROLE in $ORDERED_ROLES; do
+        echo
+        # echo "$ROLE"
+        PROMPT="I am working on a project. $DATA_PROJECT. The framework for this project is $DATA_FRAMEWORK. Our $GROUP_OF_ROLES has following roles: $ROLES. I am working on $ROLE. What should I do?"
+        echo "$PROMPT"
+        WHAT_SHOULD_I_DO_PATH="$GROUP_OF_ROLES_PATH/$ROLE/What_should_I_do.md"
+        touch $WHAT_SHOULD_I_DO_PATH
+    done
+done
