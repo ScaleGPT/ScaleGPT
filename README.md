@@ -4,6 +4,8 @@ This is a software development framework. It takes a one line requirement as inp
 
 ## Software Development Frameworks
 - Scaled Agile Framework []
+![Scaled Agile Framework](https://scaledagileframework.com/wp-content/uploads/2023/03/Full-1.png)
+Source: https://scaledagileframework.com/
 - Disciplined Agile Delivery []
 - Large-Scale Scrum []
 - Nexus Framework []

@@ -50,6 +50,7 @@ for GROUP_OF_ROLES in $ORDERED_GROUP_OF_ROLES; do
         mkdir $ACTIVITIES_PATH
         ACTIVITIES="$(cat "$GROUP_OF_ROLES_PATH/$ROLE/ACTIVITIES" | tr '\n' ' ')"
         for ACTIVITY in $ACTIVITIES; do
+            DATA_ACTIVITY_PATH="$DATA_PATH/Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$GROUP_OF_ROLES/$ROLE/Activities/$ACTIVITY/"
             echo
             ACTIVITY_PATH="$ACTIVITIES_PATH/$ACTIVITY"
             mkdir $ACTIVITY_PATH
@@ -64,7 +65,6 @@ for GROUP_OF_ROLES in $ORDERED_GROUP_OF_ROLES; do
                 WHAT_YOU_NEED_TO_KNOW_ITEM_PATH="$ACTIVITY_PATH/$WHAT_YOU_NEED_TO_KNOW_ITEM"
                 PROMPT="I am working on a project. $DATA_PROJECT. Our $GROUP_OF_ROLES has following roles: $ROLES. You are acting as $ROLE, $ACTIVITY. What are potential $WHAT_YOU_NEED_TO_KNOW_ITEM for this?"
                 echo "$PROMPT" | sed 's/_/ /g'
-                DATA_ACTIVITY_PATH="$DATA_PATH/Frameworks/$DATA_FRAMEWORK/Group_of_Roles/$GROUP_OF_ROLES/$ROLE/Activities/$ACTIVITY/"
                 mkdir -p $DATA_ACTIVITY_PATH
                 touch "$DATA_ACTIVITY_PATH/$WHAT_YOU_NEED_TO_KNOW_ITEM.md"
             done
