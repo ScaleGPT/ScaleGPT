@@ -17,6 +17,10 @@ do
     touch "Software_Development_Frameworks/$FRAMEWORK/GROUP_ROLES.md"
     GROUP_OF_ROLES_PATH="Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles"
     stat $GROUP_OF_ROLES_PATH || mkdir "$GROUP_OF_ROLES_PATH"
+    if [ ! "$(ls -A $GROUP_OF_ROLES_PATH)" ]; then
+        echo "$GROUP_OF_ROLES_PATH is empty"
+        continue
+    fi
     touch "Software_Development_Frameworks/$FRAMEWORK/Order_for_Group_of_Roles"
     GROUP_ROLES="$(ls $GROUP_OF_ROLES_PATH)"
     # echo "$GROUP_ROLES"
@@ -27,10 +31,17 @@ do
         for ROLE in $ROLES; do
             ROLE_PATH="$GROUP_ROLE_PATH/$ROLE"
             stat $ROLE_PATH || mkdir "$ROLE_PATH"
+            # check if ROLE_PATH is directory
+            if [ ! -d "$ROLE_PATH" ]; then
+                echo "$ROLE_PATH is not directory"
+                continue
+            fi
             echo "$ROLE"
             PROMPT_ACTIVITIES="List activities in $ROLE of $GROUP_ROLE in $FRAMEWORK"
-            echo $PROMPT_ACTIVITIES > "$GROUP_ROLE_PATH/$ROLE/PROMPT_ACTIVITIES.md"
-            touch "$GROUP_ROLE_PATH/$ROLE/ACTIVITIES.md"
+            echo $PROMPT_ACTIVITIES > "$ROLE_PATH/PROMPT_ACTIVITIES.md"
+            touch "$ROLE_PATH/ACTIVITIES.md"
         done
     done
 done
+
+echo "DONE"
