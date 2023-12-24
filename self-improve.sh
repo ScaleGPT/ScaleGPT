@@ -1,3 +1,4 @@
+set -xeo pipefail
 ORIGINAL_PROMPT_PATH="$(pwd)/ORIGINAL_PROMPT.md"
 PROMPT="I am creating a new project"
 PROMPT="$PROMPT. $(cat $ORIGINAL_PROMPT_PATH)"
@@ -15,18 +16,21 @@ do
     echo "$PROMPT_GROUP_OF_ROLES" > "Software_Development_Frameworks/$FRAMEWORK/PROMPT_GROUP_OF_ROLES.md"
     touch "Software_Development_Frameworks/$FRAMEWORK/GROUP_ROLES.md"
     GROUP_OF_ROLES_PATH="Software_Development_Frameworks/$FRAMEWORK/Group_of_Roles"
-    mkdir "$GROUP_OF_ROLES_PATH"
+    stat $GROUP_OF_ROLES_PATH || mkdir "$GROUP_OF_ROLES_PATH"
     touch "Software_Development_Frameworks/$FRAMEWORK/Order_for_Group_of_Roles"
     GROUP_ROLES="$(ls $GROUP_OF_ROLES_PATH)"
     # echo "$GROUP_ROLES"
     for GROUP_ROLE in $GROUP_ROLES; do
+        GROUP_ROLE_PATH="$GROUP_OF_ROLES_PATH/$GROUP_ROLE"
         echo "List roles in $GROUP_ROLE of $FRAMEWORK"
-        ROLES="$(ls $GROUP_OF_ROLES_PATH/$GROUP_ROLE)"
+        ROLES="$(ls $GROUP_ROLE_PATH)"
         for ROLE in $ROLES; do
+            ROLE_PATH="$GROUP_ROLE_PATH/$ROLE"
+            stat $ROLE_PATH || mkdir "$ROLE_PATH"
             echo "$ROLE"
             PROMPT_ACTIVITIES="List activities in $ROLE of $GROUP_ROLE in $FRAMEWORK"
-            echo $PROMPT_ACTIVITIES > "$GROUP_OF_ROLES_PATH/$GROUP_ROLE/$ROLE/PROMPT_ACTIVITIES.md"
-            touch "$GROUP_OF_ROLES_PATH/$GROUP_ROLE/$ROLE/ACTIVITIES.md"
+            echo $PROMPT_ACTIVITIES > "$GROUP_ROLE_PATH/$ROLE/PROMPT_ACTIVITIES.md"
+            touch "$GROUP_ROLE_PATH/$ROLE/ACTIVITIES.md"
         done
     done
 done
