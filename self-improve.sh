@@ -1,4 +1,14 @@
 set -xeo pipefail
+which deepctl || (curl https://deepinfra.com/get.sh | sh)
+inference_call(){
+    PROMPT="$1"
+    # jq -n --arg PROMPT "$PROMPT" '{"input": $PROMPT}'
+    PAYLOAD=$(jq -n --arg PROMPT "[INST] $PROMPT [/INST] " '{"input": $PROMPT}')
+    curl "https://api.deepinfra.com/v1/inference/mistralai/Mixtral-8x7B-Instruct-v0.1" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $(deepctl auth token)" -d "$PAYLOAD"
+}
+inference_call "I am creating a new project"
 ORIGINAL_PROMPT_PATH="$(pwd)/ORIGINAL_PROMPT.md"
 PROMPT="I am creating a new project"
 PROMPT="$PROMPT. $(cat $ORIGINAL_PROMPT_PATH)"
